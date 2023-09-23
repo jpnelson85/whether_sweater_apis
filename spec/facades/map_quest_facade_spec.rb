@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe MapQuestFacade do
   describe "class methods" do
-    it "#get_lat_long" do
+    it "#get_lat_long", :vcr do
       location = "denver,co"
       search = MapQuestFacade.new.get_lat_long(location)
 

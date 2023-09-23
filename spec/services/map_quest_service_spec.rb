@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "MapQuest Service" do
   describe "class methods" do
-    it "#get_lat_long" do
+    it "#get_lat_long", :vcr do
       location = "denver,co"
       service = MapQuestService.new
       response = service.get_lat_long(location)

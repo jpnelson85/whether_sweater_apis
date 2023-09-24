@@ -6,13 +6,13 @@ RSpec.describe "Users Requests" do
                     "password": "password",
                     "password_confirmation": "password"}
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
-    
+
     post "/api/v1/users", params: valid_data.to_json, headers: headers
 
     user_response = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    expect(response.status).to eq(201)
+    expect(response.status).to eq(:created)
 
     expect(user_response).to be_a(Hash)
     expect(user_response).to have_key(:data)

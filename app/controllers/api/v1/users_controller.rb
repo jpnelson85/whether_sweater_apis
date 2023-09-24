@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
     elsif User.find_by(email: params[:email])
       render json: { error: 'Email already exists' }, status: :bad_request
     else user.save
-      render json: UserSerializer.new(user), status: :201
+      render json: UsersSerializer.new(user), status: :created
     end
   end
 

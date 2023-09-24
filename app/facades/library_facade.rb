@@ -1,0 +1,3 @@
+class LibraryFacade
+
+end

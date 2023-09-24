@@ -10,15 +10,9 @@ class ForecastService
   end
 
   def get_city_weather(location)
-    coordinates = MapQuestService.get_lat_long(location)
-    parsed_coordinates = JSON.parse(coordinates, symbolize_names: true)
-    latitude = parsed_coordinates[:results][0][:locations][0][:latLng][:lat]
-    longitude = parsed_coordinates[:results][0][:locations][0][:latLng][:lng]
-    get_city_weather(latitude, longitude)
-  end
-
-
-  def get_city_weather(lat, long)
-    get_url("/v1/forecast.json?key=#{ENV['WEATHER_API_KEY']}&q=#{lat},#{long}&days=5")
+    coordinates = MapQuestService.new.get_lat_long(location)
+    latitude = coordinates[:results][0][:locations][0][:latLng][:lat]
+    longitude = coordinates[:results][0][:locations][0][:latLng][:lng]
+    get_url("/v1/forecast.json?key=#{ENV['WEATHER_API_KEY']}&q=#{latitude},#{longitude}&days=5")
   end
 end

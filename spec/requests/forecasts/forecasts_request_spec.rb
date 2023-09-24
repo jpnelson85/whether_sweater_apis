@@ -4,7 +4,7 @@ RSpec.describe "Forecast by Location" do
   describe "happy path" do
     it "can get forecast by location", :vcr do
       city_state = "denver,co"
-      get "/api/v0/forecast?location=#{city_state}"
+      get "/api/v1/forecast?location=#{city_state}"
 
       expect(response).to be_successful
       forecast = JSON.parse(response.body, symbolize_names: true)
@@ -41,7 +41,7 @@ RSpec.describe "Forecast by Location" do
       expect(attributes).to have_key(:daily_weather)
       expect(attributes[:daily_weather]).to be_an(Array)
       expect(attributes[:daily_weather].count).to eq(5)
-      attributres[:daily_weather].each do |day|
+      attributes[:daily_weather].each do |day|
         expect(day).to be_a(Hash)
         expect(day).to have_key(:date)
         expect(day[:date]).to be_a(String)
@@ -61,7 +61,8 @@ RSpec.describe "Forecast by Location" do
 
       expect(attributes).to have_key(:hourly_weather)
       expect(attributes[:hourly_weather]).to be_an(Array)
-      attributes[:hourly_weather].each do |hour|
+      attributes[:hourly_weather].each do |day|
+        day.each do |hour|
         expect(hour).to be_a(Hash)
         expect(hour).to have_key(:time)
         expect(hour[:time]).to be_a(String)
@@ -69,6 +70,7 @@ RSpec.describe "Forecast by Location" do
         expect(hour[:temp_f]).to be_a(Float)
         expect(hour).to have_key(:condition_text)
         expect(hour[:condition_text]).to be_a(String)
+        end
       end
     end
   end
@@ -76,9 +78,9 @@ RSpec.describe "Forecast by Location" do
   describe "sad path" do
     it 'returns an error if location is not provided', :vcr do
       location = ""
-      get "/api/v0/forecast?location=#{location}"
+      get "/api/v1/forecast?location=#{location}"
 
-      expect(response).to not_be_successful
+      expect(response.message).to eq("Bad Request")
       expect(response.status).to eq(400)
     end
   end

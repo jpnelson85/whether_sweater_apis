@@ -3,9 +3,8 @@ require "rails_helper"
 RSpec.describe "Forecast Service" do
   describe "class methods" do
     it "#get_city_weather", :vcr do
-      lat = 39.738453
-      long = -104.984853
-      weather = ForecastService.new.get_city_weather(lat, long)
+      location = "denver,co"
+      weather = ForecastService.new.get_city_weather(location)
 
       expect(weather).to be_a(Hash)
       expect(weather).to have_key(:location)

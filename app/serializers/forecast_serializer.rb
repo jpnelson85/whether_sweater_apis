@@ -1,5 +1,5 @@
 class ForecastSerializer
-  def forecast_data(current_forecast, daily_forecast, hourly_forecast)
+  def forecast_data(current_forecast, daily_forecasts, hourly_forecasts)
     {
       data: {
         id: nil,
@@ -15,22 +15,24 @@ class ForecastSerializer
             condition_text: current_forecast.condition_text,
             condition_icon: current_forecast.condition_icon
           },
-          daily_weather: daily_forecasts.map do |day|
-            { date: day.date,
-              sunrise: day.sunrise,
-              sunset: day.sunset,
-              max_temp_f: day.max_temp_f,
-              min_temp_f: day.min_temp_f,
-              condition_text: day.condition_text,
-              condition_icon: day.condition_icon
+          daily_weather: daily_forecasts.map do |daily_forecast|
+            { date: daily_forecast.date,
+              sunrise: daily_forecast.sunrise,
+              sunset: daily_forecast.sunset,
+              max_temp_f: daily_forecast.max_temp_f,
+              min_temp_f: daily_forecast.min_temp_f,
+              condition_text: daily_forecast.condition_text,
+              condition_icon: daily_forecast.condition_icon
             }
           end,
-          hourly_weather: hourly_forecasts.map do |hour|
-            { time: hour.time,
-              temp_f: hour.temp_f,
-              condition_text: hour.condition_text,
-              condition_icon: hour.condition_icon
+          hourly_weather: hourly_forecasts.map do |day_forecast|
+            day_forecast.map do |hourly_forecast|
+            { time: hourly_forecast.time_in_string,
+              temp_f: hourly_forecast.temp_f,
+              condition_text: hourly_forecast.condition_text,
+              condition_icon: hourly_forecast.condition_icon
             }
+            end
           end
         }
       }

@@ -9,13 +9,13 @@ class CurrentForecast
               :condition_icon
 
   def initialize(data)
-    @last_updated = data[:current][:last_updated]
-    @temp_f = data[:current][:temp_f]
-    @feelslike_f = data[:current][:feelslike_f]
-    @humidity = data[:current][:humidity]
-    @uv = data[:current][:uv]
-    @vis_miles = data[:current][:vis_miles]
-    @condition_text = data[:current][:condition][:text]
-    @condition_icon = data[:current][:condition][:icon]
+    @last_updated = data[:last_updated]
+    @temp_f = data[:temp_f]
+    @feelslike_f = data[:feelslike_f]
+    @humidity = data[:humidity]
+    @uv = data[:uv]
+    @vis_miles = data[:vis_miles]
+    @condition_text = data[:condition][:text]
+    @condition_icon = data[:condition][:icon]
   end
 end

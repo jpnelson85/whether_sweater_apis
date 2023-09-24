@@ -29,17 +29,17 @@ http_interactions:
       X-Ratelimit-Limit-2628000:
       - '15000'
       X-Ratelimit-Remaining-2628000:
-      - '14975'
+      - '14976'
       Ratelimit-Limit:
       - '15000'
       Ratelimit-Remaining:
-      - '14975'
+      - '14976'
       Ratelimit-Reset:
       - '2180167'
       X-Powered-By:
       - MapQuest
       X-Request-Id:
-      - e1170800-5a5f-11ee-a23e-07c5641c294c
+      - e09ecac0-5a5f-11ee-9e90-81b87b54b308
       Access-Control-Allow-Origin:
       - "*"
       Etag:
@@ -68,7 +68,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 23 Sep 2023 22:23:54 GMT
+      - Sat, 23 Sep 2023 22:23:53 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -106,9 +106,9 @@ http_interactions:
       Cdn-Status:
       - '200'
       Cdn-Requestid:
-      - 43947df11659d1b4335cc1bb0616ddee
+      - 93925ad88291c5a03911fbba574fd8ec
       Cdn-Cache:
-      - HIT
+      - EXPIRED
     body:
       encoding: ASCII-8BIT
       string: '{"location":{"name":"Denver","region":"Colorado","country":"United
@@ -253,5 +253,5 @@ http_interactions:
         21:00","temp_c":23.7,"temp_f":74.6,"is_day":0,"condition":{"text":"Clear","icon":"//cdn.weatherapi.com/weather/64x64/night/113.png","code":1000},"wind_mph":7.6,"wind_kph":12.2,"wind_degree":178,"wind_dir":"S","pressure_mb":1009.0,"pressure_in":29.8,"precip_mm":0.0,"precip_in":0.0,"humidity":24,"cloud":0,"feelslike_c":23.4,"feelslike_f":74.2,"windchill_c":23.7,"windchill_f":74.6,"heatindex_c":23.4,"heatindex_f":74.2,"dewpoint_c":2.1,"dewpoint_f":35.7,"will_it_rain":0,"chance_of_rain":0,"will_it_snow":0,"chance_of_snow":0,"vis_km":10.0,"vis_miles":6.0,"gust_mph":13.0,"gust_kph":21.0,"uv":1.0},{"time_epoch":1695873600,"time":"2023-09-27
         22:00","temp_c":22.4,"temp_f":72.4,"is_day":0,"condition":{"text":"Clear","icon":"//cdn.weatherapi.com/weather/64x64/night/113.png","code":1000},"wind_mph":6.5,"wind_kph":10.4,"wind_degree":183,"wind_dir":"S","pressure_mb":1009.0,"pressure_in":29.81,"precip_mm":0.0,"precip_in":0.0,"humidity":26,"cloud":0,"feelslike_c":23.0,"feelslike_f":73.4,"windchill_c":22.4,"windchill_f":72.4,"heatindex_c":23.0,"heatindex_f":73.4,"dewpoint_c":1.9,"dewpoint_f":35.3,"will_it_rain":0,"chance_of_rain":0,"will_it_snow":0,"chance_of_snow":0,"vis_km":10.0,"vis_miles":6.0,"gust_mph":11.1,"gust_kph":17.9,"uv":1.0},{"time_epoch":1695877200,"time":"2023-09-27
         23:00","temp_c":21.6,"temp_f":70.9,"is_day":0,"condition":{"text":"Clear","icon":"//cdn.weatherapi.com/weather/64x64/night/113.png","code":1000},"wind_mph":5.8,"wind_kph":9.4,"wind_degree":194,"wind_dir":"SSW","pressure_mb":1010.0,"pressure_in":29.81,"precip_mm":0.0,"precip_in":0.0,"humidity":27,"cloud":0,"feelslike_c":21.6,"feelslike_f":70.9,"windchill_c":21.6,"windchill_f":70.9,"heatindex_c":22.8,"heatindex_f":73.0,"dewpoint_c":1.7,"dewpoint_f":35.0,"will_it_rain":0,"chance_of_rain":0,"will_it_snow":0,"chance_of_snow":0,"vis_km":10.0,"vis_miles":6.0,"gust_mph":9.9,"gust_kph":15.9,"uv":1.0}]}]}}'
-  recorded_at: Sat, 23 Sep 2023 22:23:54 GMT
+  recorded_at: Sat, 23 Sep 2023 22:23:53 GMT
 recorded_with: VCR 6.2.0

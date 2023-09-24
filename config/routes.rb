@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-
-  get '/api/v0/forecast', to: 'forecasts#index'
+  namespace :api do
+    namespace :v1 do
+      get '/forecast', to: 'forecasts#index'
+    end
+  end
 end

@@ -2,8 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Current Forecast" do
   it "can create a current forecast PORO" do
-    current_forecast_data = ({ :current=>
-                                { :last_updated=>"2021-07-28 16:00",
+    current_forecast_data = (   { :last_updated=>"2021-07-28 16:00",
                                   :temp_f=>91.9,
                                   :feelslike_f=>91.9,
                                   :humidity=>13,
@@ -12,7 +11,7 @@ RSpec.describe "Current Forecast" do
                                   :condition=>
                                     {:text=>"Sunny",
                                     :icon=>"//cdn.weatherapi.com/weather/64x64/day/113.png"}
-                              }})
+                                })
 
     current_forecast = CurrentForecast.new(current_forecast_data)
 

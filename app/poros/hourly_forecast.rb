@@ -1,13 +1,13 @@
 class HourlyForecast
-  attr_reader :time,
+  attr_reader :time_in_string,
               :temp_f,
               :condition_text,
               :condition_icon
 
   def initialize(data)
-    @time = data[:forecast][:forecastday][:hour][:time]
-    @temp_f = data[:forecast][:forecastday][:hour][:temp_f]
-    @condition_text = data[:forecast][:forecastday][:hour][:condition][:text]
-    @condition_icon = data[:forecast][:forecastday][:hour][:condition][:icon]
+    @time_in_string = data[:time]
+    @temp_f = data[:temp_f]
+    @condition_text = data[:condition][:text]
+    @condition_icon = data[:condition][:icon]
   end
 end

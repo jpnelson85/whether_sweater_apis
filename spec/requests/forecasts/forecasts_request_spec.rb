@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Forecast by Location" do
   describe "happy path" do
-    it "can get forecast by location", :vcr do
+    it "can get forecast by location and serialized properly", :vcr do
       city_state = "denver,co"
       get "/api/v1/forecast?location=#{city_state}"
 
@@ -16,6 +16,11 @@ RSpec.describe "Forecast by Location" do
       expect(forecast[:data][:id]).to eq(nil)
       expect(forecast[:data]).to have_key(:type)
       expect(forecast[:data][:type]).to eq("forecast")
+
+      # sad path
+      expect(forecast[:data][:type]).to_not eq("weather")
+      expect(forecast[:data][:attributes]).to_not be_a(Array)
+      expect(forecast[:data][:id]).to_not be_a(Integer)
 
       attributes = forecast[:data][:attributes]
       expect(attributes).to be_a(Hash)
@@ -38,6 +43,11 @@ RSpec.describe "Forecast by Location" do
       expect(attributes[:current_weather]).to have_key(:condition_icon)
       expect(attributes[:current_weather][:condition_icon]).to be_a(String)
       
+      # sad path
+      expect(attributes[:current_weather]).to_not have_key(:temp_c)
+      expect(attributes[:current_weather]).to_not have_key(:wind_dir)
+      expect(attributes[:current_weather]).to_not have_key(:wind_mph)
+
       expect(attributes).to have_key(:daily_weather)
       expect(attributes[:daily_weather]).to be_an(Array)
       expect(attributes[:daily_weather].count).to eq(5)
@@ -57,6 +67,11 @@ RSpec.describe "Forecast by Location" do
         expect(day[:condition_text]).to be_a(String)
         expect(day).to have_key(:condition_icon)
         expect(day[:condition_icon]).to be_a(String)
+
+        # sad path
+        expect(day).to_not have_key(:max_temp_c)
+        expect(day).to_not have_key(:maxwind_mph)
+        expect(day).to_not have_key(:totalprecip_in)
       end
 
       expect(attributes).to have_key(:hourly_weather)
@@ -70,6 +85,11 @@ RSpec.describe "Forecast by Location" do
         expect(hour[:temp_f]).to be_a(Float)
         expect(hour).to have_key(:condition_text)
         expect(hour[:condition_text]).to be_a(String)
+
+        # sad path
+        expect(hour).to_not have_key(:temp_c)
+        expect(hour).to_not have_key(:wind_dir)
+        expect(hour).to_not have_key(:wind_mph)
         end
       end
     end

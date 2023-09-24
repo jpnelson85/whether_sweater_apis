@@ -12,7 +12,7 @@ RSpec.describe "Users Requests" do
     user_response = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    expect(response.status).to eq(:created)
+    expect(response.status).to eq(201)
 
     expect(user_response).to be_a(Hash)
     expect(user_response).to have_key(:data)
@@ -32,4 +32,50 @@ RSpec.describe "Users Requests" do
     expect(user_response[:data][:attributes]).to_not have_key(:password)
     expect(user_response[:data][:attributes]).to_not have_key(:password_confirmation)
   end
+
+  # sad path
+  it "can't create a user when password =! password_confirmation", :vcr do
+    invalid_data = {  "email": "j@gmail.com",
+                    "password": "password123",
+                    "password_confirmation": "password"}
+    headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
+
+    post "/api/v1/users", params: invalid_data.to_json, headers: headers
+
+    user_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(user_response[:error]).to eq("Password and password confirmation must match")
+    expect(user_response[:status]).to eq("unprocessible_entity")
+  end
+
+  # # sad path
+  # xit "can't create a user when email or password are blank", :vcr do
+  #   invalid_data = {  "email": "",
+  #                   "password": "",
+  #                   "password_confirmation": ""}
+  #   headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
+
+  #   post "/api/v1/users", params: invalid_data.to_json, headers: headers
+
+  #   user_response = JSON.parse(response.body, symbolize_names: true)
+
+  #   expect(user_response[:error]).to eq("Email, password, and password confirmation cannot be blank")
+  #   expect(user_response[:status]).to eq("unprocessible_entity")
+  # end
+
+  # # sad path
+  # xit "can't create a user if email already exists", :vcr do
+  #   User.create!(email: "j@gmail.com", password: "password", password_confirmation: "password")
+  #   invalid_data = {  "email": "j@gmail.com",
+  #                   "password": "123",
+  #                   "password_confirmation": "123"}
+  #   headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
+
+  #   post "/api/v1/users", params: invalid_data.to_json, headers: headers
+
+  #   user_response = JSON.parse(response.body, symbolize_names: true)
+
+  #   expect(user_response[:error]).to eq("Email, password, and password confirmation cannot be blank")
+  #   expect(user_response[:status]).to eq("unprocessible_entity")
+  # end
 end

@@ -12,4 +12,8 @@ class MapQuestService
   def get_lat_long(location)
     get_url("/geocoding/v1/address?key=#{ENV['MAP_QUEST_API_KEY']}&location=#{location}")
   end
+
+  def get_route(start, finish)
+    get_url("/directions/v2/route?key=#{ENV['MAP_QUEST_API_KEY']}&from=#{start}&to=#{finish}")
+  end
 end

@@ -2,8 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Sessions Requests" do
   before :each do
-    user1 = User.create!(email: "j@gmail.com", password: "password", password_confirmation: "password")
-    user2 = User.create!(email: "bob@yahoo.com", password: "12345", password_confirmation: "12345")
+    user1 = User.create!(email: "j@gmail.com", password: "password", password_confirmation: "password", api_key: "jgn983hy48thw9begh98h4539h4")
   end
 
   it "can create a session with valid credentials", :vcr do
@@ -35,7 +34,7 @@ RSpec.describe "Sessions Requests" do
     expect(user_response[:data][:attributes]).to_not have_key(:password_confirmation)
   end
 
-  xit "password or email can't be blank", :vcr do
+  it "password or email can't be blank", :vcr do
     invalid_data = { "email": "", "password": "" }
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
 
@@ -43,7 +42,7 @@ RSpec.describe "Sessions Requests" do
 
     user_response = JSON.parse(response.body, symbolize_names: true)
 
-    expect(user_response[:error]).to eq("Email and password cannot be blank")
+    expect(user_response[:error]).to eq("Email or password are incorrrect")
     expect(user_response[:status]).to eq("unprocessible_entity")
   end
 

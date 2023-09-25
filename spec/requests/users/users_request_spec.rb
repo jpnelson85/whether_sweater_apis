@@ -4,7 +4,8 @@ RSpec.describe "Users Requests" do
   it "can create a user with valid credentials", :vcr do
     valid_data = {  "email": "j@gmail.com",
                     "password": "password",
-                    "password_confirmation": "password"}
+                    "password_confirmation": "password",
+                    "api_key": "jgn983hy48thw9begh98h4539h4"}
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
 
     post "/api/v1/users", params: valid_data.to_json, headers: headers
@@ -44,12 +45,12 @@ RSpec.describe "Users Requests" do
 
     user_response = JSON.parse(response.body, symbolize_names: true)
 
-    expect(user_response[:error]).to eq("Password and password confirmation must match")
+    expect(user_response[:error]).to eq("Password confirmation doesn't match Password")
     expect(user_response[:status]).to eq("unprocessible_entity")
   end
 
   # sad path
-  xit "can't create a user when email or password are blank", :vcr do
+  it "can't create a user when email or password are blank", :vcr do
     invalid_data = {  "email": "",
                     "password": "",
                     "password_confirmation": ""}
@@ -59,13 +60,13 @@ RSpec.describe "Users Requests" do
 
     user_response = JSON.parse(response.body, symbolize_names: true)
 
-    expect(user_response[:error]).to eq("Email, password, and password confirmation cannot be blank")
+    expect(user_response[:error]).to eq("Email can't be blank, Password can't be blank, and Password can't be blank")
     expect(user_response[:status]).to eq("unprocessible_entity")
   end
 
   # sad path
-  xit "can't create a user if email already exists", :vcr do
-    User.create!(email: "j@gmail.com", password: "password", password_confirmation: "password")
+  it "can't create a user if email already exists", :vcr do
+    User.create!(email: "j@gmail.com", password: "password", password_confirmation: "password", api_key: "jgn983hy48thw9begh98h4539h4")
     invalid_data = {  "email": "j@gmail.com",
                     "password": "123",
                     "password_confirmation": "123"}
@@ -75,7 +76,7 @@ RSpec.describe "Users Requests" do
 
     user_response = JSON.parse(response.body, symbolize_names: true)
 
-    expect(user_response[:error]).to eq("Email, password, and password confirmation cannot be blank")
+    expect(user_response[:error]).to eq("Email has already been taken")
     expect(user_response[:status]).to eq("unprocessible_entity")
   end
 end

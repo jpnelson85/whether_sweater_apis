@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   before_create :generate_api_key
-  has_secure_password
   
+  validates :api_key, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true
-  validates_presence_of :password_digest
+  validates :password, presence: true
+  has_secure_password
 
   def generate_api_key
     loop do

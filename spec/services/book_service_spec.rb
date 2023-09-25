@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe "Library Service" do
+RSpec.describe "Book Service" do
   it "can get book data", :vcr do
     search = "Normal People"
-    books = LibraryService.new.get_books(search)
+    books = BookService.new.city_book_search(search)
 
     expect(books).to be_a(Hash)
     expect(books).to have_key(:docs)

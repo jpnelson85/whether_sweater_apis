@@ -1,4 +1,4 @@
-class LibraryService
+class BookService
   def conn
     Faraday.new(url: "http://openlibrary.org")
   end
@@ -9,6 +9,6 @@ class LibraryService
   end
 
   def city_book_search(location)
-    get_url("/search.json?#{location}&quantity=5")
+    get_url("/search.json?q=#{location}&limit=5")
   end
 end

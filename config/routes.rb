@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get '/forecast', to: 'forecasts#index'
       post '/sessions', to: 'sessions#create'
       post '/users', to: 'users#create'
+      get "/book-search", to: "books#index"
     end
   end
 end

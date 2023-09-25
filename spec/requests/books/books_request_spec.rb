@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.describe "Book Search" do
   it "can search for books by city and show weather", :vcr do
     location = "denver,co"
-    get "/api/v1/book-search?location=#{location}&quantity=5"
+    number_of_books = 5
+    get "/api/v1/book-search?location=#{location}&quantity=#{number_of_books}"
 
     expect(response).to be_successful
     expect(response.status).to eq(200)

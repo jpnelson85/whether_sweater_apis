@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.describe "Book Service" do
   it "can get book data", :vcr do
     search = "Normal People"
-    books = BookService.new.city_book_search(search)
+    quantity = 5
+    books = BookService.new.city_book_search(search, quantity)
 
     expect(books).to be_a(Hash)
     expect(books).to have_key(:docs)
@@ -20,5 +21,6 @@ RSpec.describe "Book Service" do
     expect(books[:docs][0]).to have_key(:isbn)
     expect(books[:docs][0][:isbn]).to be_an(Array)
     expect(books[:docs][0][:isbn][0]).to be_a(String)
+
   end
 end

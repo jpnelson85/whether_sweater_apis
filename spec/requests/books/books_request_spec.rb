@@ -26,7 +26,7 @@ RSpec.describe "Book Search" do
     expect(results[:data][:attributes][:forecast]).to have_key(:summary)
     expect(results[:data][:attributes][:forecast][:summary]).to be_a(String)
     expect(results[:data][:attributes][:forecast]).to have_key(:temperature)
-    expect(results[:data][:attributes][:forecast][:temperature]).to be_a(String)
+    expect(results[:data][:attributes][:forecast][:temperature]).to be_a(Float)
     expect(results[:data][:attributes]).to have_key(:total_books_found)
     expect(results[:data][:attributes][:total_books_found]).to be_a(Integer)
     expect(results[:data][:attributes]).to have_key(:books)
@@ -34,7 +34,7 @@ RSpec.describe "Book Search" do
     expect(results[:data][:attributes][:books].count).to eq(5)
     expect(results[:data][:attributes][:books][0]).to be_a(Hash)
     expect(results[:data][:attributes][:books][0]).to have_key(:isbn)
-    expect(results[:data][:attributes][:books][0][:isbn]).to be_a(String)
+    expect(results[:data][:attributes][:books][0][:isbn]).to be_a(Array)
     expect(results[:data][:attributes][:books][0]).to have_key(:title)
     expect(results[:data][:attributes][:books][0][:title]).to be_a(String)
   end

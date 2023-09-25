@@ -8,7 +8,7 @@ class BookService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def city_book_search(location)
-    get_url("/search.json?q=#{location}&limit=5")
+  def city_book_search(location, quantity)
+    get_url("/search.json?q=#{location}&limit=#{quantity}")
   end
 end

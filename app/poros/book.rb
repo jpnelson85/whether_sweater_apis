@@ -1,11 +1,20 @@
 class Book
   attr_reader :title,
-              :authors,
-              :isbns
+              :author,
+              :isbn,
+              :total_books_found
 
   def initialize(data)
     @title = data[:title]
-    @authors = data[:author_name]
-    @isbns = data[:isbn]
+    @author = data[:author_name]
+    @isbn = data[:isbn]
+    @total_books_found = 0
+    @destination = ""
   end
+
+  def total_books_found(location)
+    books = BookService.new.city_book_search(location)
+    @total_books_found = books[:numFound]
+  end
+
 end

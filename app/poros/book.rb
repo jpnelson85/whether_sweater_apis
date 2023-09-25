@@ -9,11 +9,10 @@ class Book
     @author = data[:author_name]
     @isbn = data[:isbn]
     @total_books_found = 0
-    @destination = ""
   end
 
-  def total_books_found(location)
-    books = BookService.new.city_book_search(location)
+  def total_books_found(location, quantity)
+    books = BookService.new.city_book_search( location, quantity)
     @total_books_found = books[:numFound]
   end
 

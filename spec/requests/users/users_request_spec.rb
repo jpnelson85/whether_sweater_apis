@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Users Requests" do
   it "can create a user with valid credentials", :vcr do
-    valid_data = {  "email": "j@gmail.com",
+    valid_data = {  "email": "jab@gmail.com",
                     "password": "password",
                     "password_confirmation": "password"}
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
@@ -35,7 +35,7 @@ RSpec.describe "Users Requests" do
 
   # sad path
   it "can't create a user when password =! password_confirmation", :vcr do
-    invalid_data = {  "email": "j@gmail.com",
+    invalid_data = {  "email": "jab@gmail.com",
                     "password": "password123",
                     "password_confirmation": "password"}
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
@@ -65,8 +65,8 @@ RSpec.describe "Users Requests" do
 
   # sad path
   it "can't create a user if email already exists", :vcr do
-    User.create!(email: "j@gmail.com", password: "password", password_confirmation: "password", api_key: "jgn983hy48thw9begh98h4539h4")
-    invalid_data = {  "email": "j@gmail.com",
+    User.create!(email: "jab@gmail.com", password: "password", password_confirmation: "password", api_key: "jgn983hy48thw9begh98h4539h4")
+    invalid_data = {  "email": "jab@gmail.com",
                     "password": "123",
                     "password_confirmation": "123"}
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}

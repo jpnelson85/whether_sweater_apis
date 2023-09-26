@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.describe "Sessions Requests" do
   before :each do
-    user1 = User.create!(email: "j@gmail.com", password: "password", password_confirmation: "password", api_key: "jgn983hy48thw9begh98h4539h4")
+    user1 = User.create!(email: "jab@gmail.com", password: "password", password_confirmation: "password", api_key: "jgn983hy48thw9begh98h4539h4")
   end
 
   it "can create a session with valid credentials", :vcr do
-    valid_data = { "email": "j@gmail.com", "password": "password" }
+    valid_data = { "email": "jab@gmail.com", "password": "password" }
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
     post "/api/v1/sessions", params: valid_data.to_json, headers: headers
 
@@ -61,7 +61,7 @@ RSpec.describe "Sessions Requests" do
 
   # sad path
   it "can't create a user if email already exists", :vcr do
-    invalid_data = { "email": "j@gmail.com", "password": "12345" }
+    invalid_data = { "email": "jab@gmail.com", "password": "12345" }
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
 
     post "/api/v1/sessions", params: invalid_data.to_json, headers: headers

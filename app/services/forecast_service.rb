@@ -26,7 +26,7 @@ class ForecastService
   end
 
   def get_destination_weather(latitude, longitude)
-    get_weather_url("/data/2.5/onecall/?key=#{ENV['WEATHER_API_KEY']}&q=#{latitude},#{longitude}&exclude=minutely,hourly&units=imperial")
+    get_weather_url("/v1/forecast.json?key=#{ENV['WEATHER_API_KEY']}&q=#{latitude},#{longitude}&days=5")
   end
 
   def get_roadtrip_details(origin, destination)

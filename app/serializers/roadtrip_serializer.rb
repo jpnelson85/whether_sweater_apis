@@ -1,5 +1,7 @@
 class RoadtripSerializer
   def self.serialize(start, destination, roadtrip, weather)
+# require 'pry'; binding.pry
+# require 'pry'; binding.pry
     {
       data: {
         id: 'null',
@@ -7,10 +9,11 @@ class RoadtripSerializer
         attributes: {
           start_city: start,
           end_city: destination,
-          travel_time: roadtrip.real_travel_time,
+          travel_time: roadtrip,
           weather_at_eta: {
-            temperature: weather.temperature,
-            conditions: weather.condition
+            datetime: weather[:datetime],
+            temperature: weather[:temperature],
+            condition: weather[:condition]
           }
         }
       }

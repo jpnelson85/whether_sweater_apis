@@ -1,7 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   def create
-    user = User.new(create_user_params)
-    user.generate_api_key
+    user = User.new(create_user_params.merge(api_key: set_api_key))
     if user.save
       render json: UserSerializer.serialize(user), status: 201
     else
@@ -14,5 +13,9 @@ class Api::V1::UsersController < ApplicationController
 
   def create_user_params
     params.permit(:email, :password, :password_confirmation)
+  end
+
+  def set_api_key
+    SecureRandom.base58(24)
   end
 end

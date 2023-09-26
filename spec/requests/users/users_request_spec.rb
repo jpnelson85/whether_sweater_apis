@@ -4,8 +4,7 @@ RSpec.describe "Users Requests" do
   it "can create a user with valid credentials", :vcr do
     valid_data = {  "email": "j@gmail.com",
                     "password": "password",
-                    "password_confirmation": "password",
-                    "api_key": "jgn983hy48thw9begh98h4539h4"}
+                    "password_confirmation": "password"}
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
 
     post "/api/v1/users", params: valid_data.to_json, headers: headers

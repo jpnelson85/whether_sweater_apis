@@ -50,9 +50,9 @@ The Whether Sweater API provides the following endpoints:
 
 ### Retrieve Weather for a City
 
-Endpoint: /api/v1/forecast?location=<city>,<state>
-HTTP Method: GET
-Usage: Retrieve current and forecasted weather data for a specific city and state. This endpoint will use the MapQuest Geocoding API and a weather data API to provide the weather information.
+#### Endpoint: /api/v1/forecast?location=<city>,<state>
+#### HTTP Method: GET
+#### Usage: Retrieve current and forecasted weather data for a specific city and state. This endpoint will use the MapQuest Geocoding API and a weather data API to provide the weather information.
 
 Response
 ```
@@ -88,9 +88,9 @@ Response
 ```
 ### User Registration
 
-Endpoint: /api/v1/users
-HTTP Method: POST
-Usage: Register a new user by providing an email, password, and password confirmation in a JSON payload. The API will generate a unique API key for the user.
+#### Endpoint: /api/v1/users
+#### HTTP Method: POST
+#### Usage: Register a new user by providing an email, password, and password confirmation in a JSON payload. The API will generate a unique API key for the user.
 
 Request
 ```
@@ -117,9 +117,9 @@ body:
 ```
 ### User Login
 
-Endpoint: /api/v0/sessions
-HTTP Method: POST
-Usage: Authenticate a user by providing their email and password in a JSON payload. If the credentials are valid, the API will return the user's API key.
+#### Endpoint: /api/v0/sessions
+#### HTTP Method: POST
+#### Usage: Authenticate a user by providing their email and password in a JSON payload. If the credentials are valid, the API will return the user's API key.
 
 Request
 POST /api/v1/sessions
@@ -149,9 +149,10 @@ body:
 ### Plan a Road Trip
 
 
-Endpoint: /api/v1/road_trip
-HTTP Method: POST
-Usage: Plan a road trip by specifying the origin, destination, and your API key in a JSON payload. The API will use MapQuest's Directions API to determine the travel time and provide weather conditions at the destination upon arrival.
+#### Endpoint: /api/v1/road_trip
+#### HTTP Method: POST
+#### Usage: Plan a road trip by specifying the origin, destination, and your API key in a JSON payload. The API will use MapQuest's Directions API to determine the travel time and provide weather conditions at the destination upon arrival.
+
 Please ensure you provide the required parameters, headers, and credentials as specified in the project requirements. Use a tool like Postman to test the endpoints with various scenarios to verify the correct functionality.
 
 Request

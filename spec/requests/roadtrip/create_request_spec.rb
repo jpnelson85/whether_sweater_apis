@@ -40,4 +40,34 @@ RSpec.describe "Roadtrip Index" do
     expect(user_response[:data][:attributes][:weather_at_eta]).to have_key(:condition)
     expect(user_response[:data][:attributes][:weather_at_eta][:condition]).to be_a(String)
   end
+
+  # sad path
+  it "can't return roadtrip data when api_key is invalid", :vcr do
+    invalid_data = {  "origin": "New York,NY",
+                    "destination": "Los Angeles,CA",
+                    "api_key": "125125125"
+                  }
+    headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
+
+    post "/api/v1/road_trip", params: invalid_data.to_json, headers: headers
+    user_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(user_response[:error]).to eq("Unauthorized")
+    expect(user_response[:status]).to eq(401)
+  end
+
+  # sad path
+  it "can't return roadtrip data when route is impossible", :vcr do
+    invalid_data = {  "origin": "Sydney,AU",
+                    "destination": "Los Angeles,CA",
+                    "api_key": @user.api_key
+                  }
+    headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
+
+    post "/api/v1/road_trip", params: invalid_data.to_json, headers: headers
+    user_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(user_response[:error]).to eq("Impossible Route")
+    expect(user_response[:status]).to eq(400)
+  end
 end

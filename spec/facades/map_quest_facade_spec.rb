@@ -20,5 +20,21 @@ RSpec.describe MapQuestFacade do
       expect(search[:results][0][:locations][0][:latLng]).to have_key(:lng)
       expect(search[:results][0][:locations][0][:latLng][:lng]).to be_a(Float)
     end
+
+    it "#get_route", :vcr do
+      start = "denver,co"
+      finish = "pueblo,co"
+      data = MapQuestFacade.new.get_route(start, finish)
+
+      expect(data).to be_a(Hash)
+      expect(data).to have_key(:route)
+      expect(data[:route]).to be_a(Hash)
+      expect(data[:route]).to have_key(:formattedTime)
+      expect(data[:route][:formattedTime]).to be_a(String)
+      expect(data[:route]).to have_key(:realTime)
+      expect(data[:route][:realTime]).to be_a(Integer)
+      expect(data[:route]).to have_key(:time)
+      expect(data[:route][:time]).to be_a(Integer)
+    end
   end
 end

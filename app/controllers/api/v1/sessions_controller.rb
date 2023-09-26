@@ -9,7 +9,7 @@ class Api::V1::SessionsController < ApplicationController
     elsif user.authenticate(params[:password]) == false
       render json: { error: 'Email or password are incorrrect', status: :unprocessible_entity }
     else user && user.authenticate(params[:password])
-      render json: UsersSerializer.serialize(user), status: 200
+      render json: UserSerializer.serialize(user), status: 200
     end
   end
 end

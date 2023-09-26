@@ -2,20 +2,20 @@ require "rails_helper"
 
 RSpec.describe "Roadtrip Index" do
   before :each do
-    User.create!(email: "jeff@jeff.com", password: "password", api_key: "jgn983hy48thw9begh98h4539h4")
+    @user = User.new(email: "jeff@jeff.com", password: "password", password_confirmation: "password")
   end
   it "can return roadtrip data", :vcr do
     valid_data = {  "origin": "New York,NY",
                     "destination": "Los Angeles,CA",
-                    "api_key": "jgn983hy48thw9begh98h4539h4"
+                    "api_key": "@user.api_key"
                   }
     headers = {"CONTENT_TYPE" => "application/json", "Accept" => "application/json"}
-    post "/api/v1/road_trip", params: valid_data.to_json, headers: headers
 
+    post "/api/v1/road_trip", params: valid_data.to_json, headers: headers
     user_response = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    expect(response.status).to eq(200)
+    expect(response.status).to eq(201)
 
     expect(user_response).to be_a(Hash)
     expect(user_response).to have_key(:data)

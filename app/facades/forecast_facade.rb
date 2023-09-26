@@ -8,14 +8,14 @@ class ForecastFacade
   end
 
   def self.get_daily_weather(all_weather)
-    all_weather[0..4].map do |day|
+    all_weather.map do |day|
       DailyForecast.new(day)
     end
   end
 
   def self.get_hourly_weather(all_weather)
-    all_weather[0..4].map do |day|
-      day[:hour][0..24].map do |hour|
+    all_weather.map do |day|
+      day[:hour].map do |hour|
         HourlyForecast.new(hour)
       end
     end

@@ -95,6 +95,7 @@ RSpec.describe "Forecast by Location" do
     end
   end
 
+  # sad path
   describe "sad path" do
     it 'returns an error if location is not provided', :vcr do
       location = ""

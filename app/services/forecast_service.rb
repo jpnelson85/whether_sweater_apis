@@ -35,6 +35,6 @@ class ForecastService
     longitude = coordinates[:results][0][:locations][0][:latLng][:lng]
     route = MapQuestService.new.get_route(origin, destination)
     time = route[:route][:formattedTime]
-    get_url("/v1/forecast.json?key=#{ENV['WEATHER_API_KEY']}&q=#{latitude},#{longitude}&days=5")
+    get_weather_url("/v1/forecast.json?key=#{ENV['WEATHER_API_KEY']}&q=#{latitude},#{longitude}&days=5")
   end
 end
